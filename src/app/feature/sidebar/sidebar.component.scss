@@ -1,0 +1,109 @@
+.layout-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #fff;
+  width: 250px;
+  border-right: 1px solid #dee2e6;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 3px 3px 0;
+}
+.layout-sidebar .logo {
+  color: #0C0C0C;
+  min-height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  z-index: 1;
+  border-right: 1px solid #dee2e6;
+  font-family: sans-serif;
+  font-size: 2rem;
+}
+
+.layout-sidebar .layout-menu {
+  padding: 0 1rem;
+  overflow-y: auto;
+  flex-grow: 1;
+  border-right: 1px solid #dee2e6;
+}
+
+.layout-sidebar .layout-menu .menu-category:first-child {
+  border-top: 0 none;
+  padding-top: 1rem;
+}
+.layout-sidebar .layout-menu .menu-category {
+  display: block;
+  color: #6c757d;
+  font-weight: 600;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 1.5rem 0 1rem;
+  font-size: 0.857rem;
+  text-transform: uppercase;
+  border-top: 1px solid #dee2e6;
+}
+.layout-sidebar .layout-menu .menu-items {
+  padding: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-sidebar .layout-menu .menu-items a {
+  color: #0C0C0C;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.layout-sidebar .layout-menu .menu-items a:focus {
+  z-index: 1;
+  outline: 0 none;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 0 0 0.2em #bbdefb;
+}
+
+.layout-sidebar .layout-menu .menu-items a:hover {
+  background-color: #F1F2F3;
+  border-right-color: #F48225;
+  border-right-style: solid;
+  border-right-width: 7px;
+}
+
+
+@media screen and (max-width: 960px){
+.layout-sidebar {
+    transform: translate(-100%);
+    z-index: 999;
+}
+}
+
+.activeTab{
+ background-color: #F1F2F3;
+}
+
+// For Sidebar Functionality
+// Create a component for the sidebar mask and app toolbar for mobile
+/*
+@media screen and (max-width: 960px)
+.layout-mask {
+    background-color: #0000001a;
+}
+@media screen and (max-width: 960px)
+.layout-mask.layout-mask-active {
+    z-index: 998;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0006;
+    transition: background-color .5s;
+} */
