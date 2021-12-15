@@ -11,7 +11,7 @@ import { SearchComponent } from './feature/search/search.component';
 import { SharingService } from './services/sharing.service';
 import { DisplayComponent } from './feature/display/display.component';
 import { DisplayChildComponent } from './feature/display/display-child/display-child.component';
-import { StackCommService } from './services/stack-comm.service';
+import { SearchresultService } from './services/searchresult.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { StackCommService } from './services/stack-comm.service';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [SharingService, StackCommService],
+  providers: [SharingService, SearchresultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

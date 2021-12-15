@@ -1,25 +1,22 @@
-export interface Owner_resp {
-  account_id: number;
-  reputation: number;
-  user_id: number;
-  user_type: string;
-  profile_image: string;
-  display_name: string;
-  link: string;
-}
+import { IOwner } from "../search.response.model";
 
-export interface Search {
+/**
+ * @property tags - array of tags
+ * @property owner - owner of the question
+ * @property is_answered - is the question answered
+ * @property view_count - number of views
+ * @property accepted_answer_id - id of the accepted answer
+ */
+export interface SearchViewModel {
   tags: string[];
-  owner: Owner_resp;
+  owner: IOwner;
   is_answered: boolean;
   view_count: number;
-  closed_date: number;
   answer_count: number;
-  score: number;
-  last_activity_date: number;
   creation_date: number;
   question_id: number;
   link: string;
-  closed_reason: string;
   title: string;
+
+  body_markdown: string;
 }

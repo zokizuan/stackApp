@@ -1,38 +1,60 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchstoreService } from 'src/app/services/searchstore.service';
+import { ISearch, IStackAPI_resp } from 'src/app/core/models/search.response.model';
+import { SearchViewModel } from 'src/app/core/models/viewmodel/search.view.model';
+import { SearchresultService } from 'src/app/services/searchresult.service';
 import { SharingService } from 'src/app/services/sharing.service';
-import { StackCommService } from 'src/app/services/stack-comm.service';
+
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit,OnDestroy {
+export class SearchComponent implements OnInit, OnDestroy {
   searchValue!: string;
-  constructor(private stackCommService: StackCommService,
-    private router: Router, private sharingService: SharingService,private searchstoreService:SearchstoreService) {
+  constructor(
+    private router: Router, private sharingService: SharingService, private searchresultService:SearchresultService) {
+  }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
   }
   ngOnInit(): void {
-    
+
   }
-  searchResults: any[] = [];
+  // declare searchresult variable
+  searchResults: any;
+
+  // function for sending searchresult to display component
+
   sendSearchResults() {
     this.sharingService.setData(this.searchResults);
     this.router.navigate(['search-results']);
   }
-  
-  // SearchQuestions
-  searchQuestions(searchQuery: string) {
-    this.stackCommService.getSearchResult(this.searchValue).subscribe(value => this.searchResults.push(value.items));
-    this.sendSearchResults();
+  testvar: any;
+  searchQuestion(searchQuery:string) {
+    this.searchresultService.searchQuestion(searchQuery);
   }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }  
-  
- /*  ngOnDestroy(): void {
-    this.searchResult$.Unsubsribe();
+  // SearchQuestions api consume
+ /*  searchQuestions(searchQuery: string) {
+    this.testvar = this.stackCommService.getSearchResult(searchQuery).subscribe((searchResult: IStackAPI_resp) => {
+      let searchResultData: SearchViewModel[] = searchResult.items.map((result: ISearch) => {
+        return {
+          tags: result.tags,
+          owner: result.owner,
+          is_answered: result.is_answered,
+          view_count: result.view_count,
+          answer_count: result.answer_count,
+          creation_date: result.creation_date,
+          question_id: result.question_id,
+          link: result.link,
+          title: result.title,
+          body_markdown: result.body_markdown
+        }
+      });
+      console.log(searchResultData);
+    });
+    this.sendSearchResults();
   } */
+
 }
