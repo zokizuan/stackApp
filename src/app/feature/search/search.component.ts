@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
+import { SearchstoreService } from 'src/app/services/searchstore.service';
 import { SharingService } from 'src/app/services/sharing.service';
 import { StackCommService } from 'src/app/services/stack-comm.service';
 
@@ -11,9 +12,10 @@ import { StackCommService } from 'src/app/services/stack-comm.service';
 export class SearchComponent implements OnInit,OnDestroy {
   searchValue!: string;
   constructor(private stackCommService: StackCommService,
-    private router: Router, private sharingService: SharingService) {
+    private router: Router, private sharingService: SharingService,private searchstoreService:SearchstoreService) {
   }
   ngOnInit(): void {
+    
   }
   searchResults: any[] = [];
   sendSearchResults() {
