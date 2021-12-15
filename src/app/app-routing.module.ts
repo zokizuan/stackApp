@@ -1,10 +1,10 @@
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DisplaySearchResultComponent } from './feature/display-search-result/display-search-result.component';
+import { DisplayComponent } from './feature/display/display.component';
 
 const routes: Routes = [
-  { path: 'search-results', component: DisplaySearchResultComponent },
+  { path: 'search-results', component: DisplayComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
 ];
 

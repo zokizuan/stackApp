@@ -13,10 +13,7 @@ export class SharingService {
   }
 
   getData(): any {
-    console.log(this.data);
-    
     return this.data;
-    
   }
   constructor() { }
 }

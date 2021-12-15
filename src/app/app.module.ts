@@ -8,16 +8,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './feature/sidebar/sidebar.component';
 import { SearchComponent } from './feature/search/search.component';
-import { DisplaySearchResultComponent } from './feature/display-search-result/display-search-result.component';
 import { SharingService } from './services/sharing.service';
+import { DisplayComponent } from './feature/display/display.component';
+import { DisplayChildComponent } from './feature/display/display-child/display-child.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     SearchComponent,
-    DisplaySearchResultComponent
-  ],
+    DisplayComponent,
+    DisplayChildComponent,
+ ],
   imports: [
     BrowserModule,
     HttpClientModule,
