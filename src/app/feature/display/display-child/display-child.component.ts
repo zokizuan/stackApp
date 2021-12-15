@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-display-child',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-child.component.scss']
 })
 export class DisplayChildComponent implements OnInit {
-
+  @Input() searchResults: any;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  test() {
+    console.log(this.searchResults);
+  }
 }

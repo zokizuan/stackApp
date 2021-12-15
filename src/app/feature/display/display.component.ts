@@ -13,7 +13,4 @@ export class DisplayComponent implements OnInit {
   ngOnInit(): void {
     this.searchResults = this.sharingService.getData();
   }
-  test() {
-    console.log(this.searchResults);
-  }
 }
