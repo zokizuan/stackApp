@@ -10,7 +10,7 @@ import { SidebarComponent } from './feature/sidebar/sidebar.component';
 import { SearchComponent } from './feature/search/search.component';
 import { SharingService } from './services/sharing.service';
 import { DisplayComponent } from './feature/display/display.component';
-import { DisplayChildComponent } from './feature/display/display-child/display-child.component';
+import { DisplayViewComponent } from './feature/display/display-view/display-view.component';
 import { SearchresultService } from './services/searchresult.service';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { SearchresultService } from './services/searchresult.service';
     SidebarComponent,
     SearchComponent,
     DisplayComponent,
-    DisplayChildComponent,
+    DisplayViewComponent,
   ],
   imports: [
     BrowserModule,

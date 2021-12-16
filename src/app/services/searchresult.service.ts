@@ -15,7 +15,7 @@ import { ISearchresult_state } from '../core/models/statemodel/stateresponse';
 export class SearchresultService extends Store<ISearchresult_state> {
   constructor(private http: HttpClient) {
     super({
-      record: [],
+      searchResults: [],
       total_record: 0,
       searchKey: "",
       pagesize: 0,
@@ -42,9 +42,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
       .pipe(retry(1), catchError(this.handleError), first())
       .subscribe((response: IStackAPI_resp) => {
         let searchResultData: ISearchresult_state = {
-          record: [{
-            search_items: response.items
-          }],
+          searchResults: response.items,
           total_record: response.total,
           searchKey: searchQuery,
           pagesize: response.page_size,
@@ -54,40 +52,10 @@ export class SearchresultService extends Store<ISearchresult_state> {
       });
   }
 
-  /*          .map(
-            (response) => 
-                {
-                  // console.log(response.title);
-                  return response;
-                }
-            )
-               */
-
   // getNextPage
   // getPreviousPage
   // getPage
-
-  // SearchQuestions api consume
-  /*   searchQuestions(searchQuery: string) {
-      this.stackCommService.getSearchResult(searchQuery).subscribe((searchResult: IStackAPI) => {
-        let searchResultData: SearchViewModel[] = searchResult.items.map((result: ISearch_resp) => {
-          return {
-            tags: result.tags,
-            owner: result.owner,
-            is_answered: result.is_answered,
-            view_count: result.view_count,
-            answer_count: result.answer_count,
-            creation_date: result.creation_date,
-            question_id: result.question_id,
-            link: result.link,
-            title: result.title,
-            body_markdown: result.body_markdown
-          }
-        });
-        console.log(searchResultData);
-      });
-    } */
-
+  
   // Error handling
   handleError(error: any) {
     let errorMessage = '';

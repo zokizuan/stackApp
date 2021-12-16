@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchresultService } from 'src/app/services/searchresult.service';
 import { SharingService } from 'src/app/services/sharing.service';
 
 @Component({
@@ -8,9 +9,9 @@ import { SharingService } from 'src/app/services/sharing.service';
 })
 export class DisplayComponent implements OnInit {
   searchResults: any;
-  constructor(private sharingService: SharingService) { }
+  constructor(private sharingService: SharingService, private searchresultService:SearchresultService) { }
 
   ngOnInit(): void {
-    this.searchResults = this.sharingService.getData();
+    // this.searchResults = this.sharingService.getData();
   }
 }

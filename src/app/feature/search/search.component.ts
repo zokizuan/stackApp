@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import {  IStackAPI_resp } from 'src/app/core/models/search.response.model';
 import { ISearchresult_state } from 'src/app/core/models/statemodel/stateresponse';
-import { SearchViewModel } from 'src/app/core/models/viewmodel/search.view.model';
 import { SearchresultService } from 'src/app/services/searchresult.service';
 import { SharingService } from 'src/app/services/sharing.service';
 
@@ -25,25 +24,24 @@ export class SearchComponent implements OnInit, OnDestroy {
    * Prevent memory leak by ensureing all subscriptions are unsbscribed when the component is destroyed 
    */
   ngOnDestroy(): void {
-    this.subscription.forEach(subscription => subscription.unsubscribe())
+    // this.subscription.forEach(subscription => subscription.unsubscribe())
   }
   /**
    * Subscribe to the value from the store 
    */
   ngOnInit(): void {
-    this.searchResult$ = this.searchresultService.getState();
-    this.subscription.push(this.searchResult$.subscribe(sResult => this.searchResult = sResult));
+    // this.searchResult$ = this.searchresultService.getState();
+    // this.subscription.push(this.searchResult$.subscribe(sResult => this.searchResult = sResult));
   }
   // declare searchresult variable
   searchResults: any;
 
   // function for sending searchresult to display component
 
-  sendSearchResults() {
+/*   sendSearchResults() {
     this.sharingService.setData(this.searchResults);
     this.router.navigate(['search-results']);
-  }
-  testvar: any;
+  } */
   searchQuestion(searchQuery:string) {
     this.searchresultService.searchQuestion(searchQuery);
     

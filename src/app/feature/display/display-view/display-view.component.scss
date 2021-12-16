@@ -1,0 +1,83 @@
+.container {
+  width: 100vw;
+  background-color: #f8f9f9;
+  display: flex;
+  height: 70px;
+  box-sizing: border-box;
+  border-top: 3px solid #f48225;
+  align-items: center;
+}
+
+.logo-container {
+  padding-left: 20px;
+  font-size: 1.5rem;
+  width: 20%;
+}
+.search-container {
+  width: 80%;
+  justify-content: center;
+}
+
+[pInputText] {
+  width: 650px;
+}
+
+#mainbar,
+.mainbar {
+  width: calc(100% - 300px - 24px);
+}
+#mainbar,
+.mainbar {
+  float: left;
+  width: 728px;
+  margin: 0;
+  padding: 0;
+}
+.summary-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 8px;
+  overflow: hidden;
+  border-bottom: 1px solid hsl(210, 8%, 90%);
+}
+
+.child2-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tags_user {
+  display: flex;
+  justify-content: space-between;
+}
+.question {
+  color: hsl(206deg 100% 40%);
+  font-size: 1.30769231rem;
+}
+.statscontainer {
+  margin-right: 16px;
+  width: 58px;
+  margin-left: 8px;
+  color: hsl(210, 8%, 45%);
+  font-size: 11px;
+}
+
+.votecontainer {
+  padding: 0;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.answercountcontainer {
+  padding: 7px 0 5px;
+  text-align: center;
+  background-color: hsl(140deg 40% 55%);
+  color: #fff;
+  border-radius: 3px;
+}
+.owner{
+  color: hsl(210,8%,45%);
+  font-size: 12px;
+  margin-top: 4px;
+  margin-right: 16px;
+}
