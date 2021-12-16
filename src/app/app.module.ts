@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './feature/sidebar/sidebar.component';
 import { SearchComponent } from './feature/search/search.component';
-import { SharingService } from './services/sharing.service';
 import { DisplayComponent } from './feature/display/display.component';
 import { DisplayViewComponent } from './feature/display/display-view/display-view.component';
 import { SearchresultService } from './services/searchresult.service';
@@ -27,7 +26,7 @@ import { SearchresultService } from './services/searchresult.service';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [SharingService, SearchresultService],
+  providers: [ SearchresultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

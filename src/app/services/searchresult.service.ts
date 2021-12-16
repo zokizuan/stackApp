@@ -1,7 +1,4 @@
-import {
-  ISearch,
-  IStackAPI_resp,
-} from './../core/models/search.response.model';
+import { IStackAPI_resp } from './../core/models/search.response.model';
 import { Injectable } from '@angular/core';
 import { Store } from '../store';
 
@@ -35,8 +32,8 @@ export class SearchresultService extends Store<ISearchresult_state> {
   // Define API
   APIBoilerPlate = 'https://api.stackexchange.com/2.3';
   APIParameter = "/search/advanced?";
-  pageNumber = "page=220";
-  pageSize = "&pagesize=10";
+  pageNumber = "page=1";
+  pageSize = "&pagesize=15";
   stackoverflow = "&site=stackoverflow";
   filter = "&filter=!3u4cnJYn(8nBk_9SQ";
 
@@ -62,6 +59,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
         this.setState(searchResultData);
       });
   }
+
 
   // getNextPage
   // getPreviousPage
