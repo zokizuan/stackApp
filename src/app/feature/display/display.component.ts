@@ -1,3 +1,4 @@
+import { ISearch } from './../../core/models/search.response.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ISearchresult_state } from 'src/app/core/models/statemodel/stateresponse';
@@ -15,15 +16,18 @@ export class DisplayComponent implements OnInit {
   subscription: Subscription[] = [];
   sResult$!: Observable<ISearchresult_state>;
   sResult!: ISearchresult_state;
-  resultForDisplay!: any;
+  resultForDisplay!: ISearch[];
   /**
   * Subscribe to the value from the store 
   */
   ngOnInit(): void {
     this.sResult$ = this.searchresultService.getState();
-    this.subscription.push(this.sResult$.subscribe(res => this.sResult = res));
-    this.resultForDisplay = this.sResult.searchResults;
-    console.log(this.sResult);
+    this.subscription.push(this.sResult$.subscribe
+      ((res) => {
+        this.sResult = res
+        this.resultForDisplay = res.searchResults
+      })
+    );
   }
   /**
   * Prevent memory leak by ensureing all subscriptions are unsbscribed when the component is destroyed 
@@ -32,7 +36,7 @@ export class DisplayComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe())
   }
   Test() {
-    this.resultForDisplay = this.sResult.searchResults;
+    // this.resultForDisplay = this.sResult.searchResults;
     console.log(this.sResult);
   }
   nextpage() {

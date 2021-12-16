@@ -1,5 +1,3 @@
-<p>display-child works!</p>
-
  <div id="mainbar">
   <div>
     <h1 style="flex: 1 auto !important;font-size: 2.07692308rem !important;"> Search Results </h1>
@@ -7,8 +5,7 @@
   <div class="mb24 fs-caption fc-light lh-xs">
     <!-- <div class="mb8">Results for {{searchValue}}</div> -->
   </div>  
-  <!-- <div *ngIf="resultForDisplay == ">Found no search results</div> -->
-  <div *ngIf="resultForDisplay">
+  <div *ngIf="resultForDisplay.length == 0">Found no search results</div>
     <div *ngFor="let results of resultForDisplay" class="summary-container">
       <div class="statscontainer">
         <div class="votecontainer">
@@ -36,7 +33,6 @@
         </div>
       </div>
     </div>
-  </div>
   <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>  
 </div>
 <button (click)="test()"></button>
