@@ -3,7 +3,7 @@ import { ISearch } from "../search.response.model";
 export interface ISearchresult_state {
   searchResults: ISearch[] ;
   total_record: number;
-  searchKey: string;
+  searchKey: string | undefined ;
   pagesize: number;
   pageno: number;
 }

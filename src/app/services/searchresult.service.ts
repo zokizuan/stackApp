@@ -36,23 +36,27 @@ export class SearchresultService extends Store<ISearchresult_state> {
   pageSize = "&pagesize=15";
   stackoverflow = "&site=stackoverflow";
   filter = "&filter=!3u4cnJYn(8nBk_9SQ";
-
+  API_URL!: string;
   /**
    * @description This method is caleld every time user enters NEW query . Response from the api is set to the store 
    * @param searchQuery query eneter by the user
    */
   public callSearch(searchQuery: string) {
-    this.SearchQuery = searchQuery;
-    searchQuery = "&q=" + searchQuery;
-    const API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize + searchQuery + this.stackoverflow + this.filter
+    if (searchQuery == "" || searchQuery == undefined) {
+      this.API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize  + this.stackoverflow + this.filter
+    } else {      
+      this.SearchQuery = searchQuery;
+      searchQuery = "&q=" + searchQuery;
+      this.API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize + searchQuery + this.stackoverflow + this.filter
+    }
     this.http
-      .get<IStackAPI_resp>(API_URL)
+      .get<IStackAPI_resp>(this.API_URL)
       .pipe(retry(1), catchError(this.handleError), first())
       .subscribe((response: IStackAPI_resp) => {
         let searchResultData: ISearchresult_state = {
           searchResults: response.items,
           total_record: response.total,
-          searchKey: searchQuery,
+          searchKey: searchQuery, 
           pagesize: response.page_size,
           pageno: response.page
         }

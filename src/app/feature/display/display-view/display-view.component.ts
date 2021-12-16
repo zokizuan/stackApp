@@ -1,3 +1,4 @@
+import { ISearch } from './../../../core/models/search.response.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { SearchresultService } from 'src/app/services/searchresult.service';
 
@@ -9,7 +10,7 @@ import { SearchresultService } from 'src/app/services/searchresult.service';
 export class DisplayViewComponent implements OnInit {
 
   constructor(private searchresultService: SearchresultService) { }
-  @Input() resultForDisplay: any;
+  @Input() resultForDisplay!: ISearch[];
   ngOnInit(): void {
   }
   ngOnDestroy(): void {
