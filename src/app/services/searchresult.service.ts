@@ -1,22 +1,25 @@
-import { ISearch, IStackAPI_resp } from './../core/models/search.response.model';
+import {
+  ISearch,
+  IStackAPI_resp,
+} from './../core/models/search.response.model';
 import { Injectable } from '@angular/core';
 import { Store } from '../store';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, retry, throwError } from 'rxjs';
 import { ISearchresult_state } from '../core/models/statemodel/stateresponse';
-import { SearchViewModel } from '../core/models/viewmodel/search.view.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchresultService extends Store<ISearchresult_state> {
-
   constructor(private http: HttpClient) {
     super({
-      record: null,
+      record: [],
       total_record: 0,
-      searchKey: ''
+      searchKey: "",
+      pagesize: 0,
+      pageno: 0,
     });
   }
 
@@ -25,26 +28,39 @@ export class SearchresultService extends Store<ISearchresult_state> {
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
+      'Content-Type': 'application/json',
+    }),
+  };
 
   public searchQuestion(searchQuery: string) {
-    return this.http.get<IStackAPI_resp>(this.apiURL + '/search/advanced?q=' + searchQuery + '&site=stackoverflow' + '&filter=!nKzQUR30W7')
-      .pipe(
-        retry(1),
-        catchError(this.handleError),
-      ).subscribe((response: IStackAPI_resp) => {
-        let searchResultData: ISearchresult_state = response.items.map((result: ISearchresult_state) => {
-          return {
-            record: result.record,
-            total_record: result.total_record,
-            searchKey: result.searchKey         
-          }
-        });
+    return this.http
+      .get<IStackAPI_resp>(this.apiURL + '/search/advanced?q=' + searchQuery + '&site=stackoverflow' +
+        '&filter=!3u4cnJYn(8nBk_9SQ')
+      .pipe(retry(1), catchError(this.handleError))
+      .subscribe((response: IStackAPI_resp) => {
+        let searchResultData: ISearchresult_state = {
+          record: [{
+            search_items: response.items
+          }],
+          total_record: response.total,
+          searchKey: searchQuery,
+          pagesize: response.page_size,
+          pageno: response.page
+        }
+        console.log(searchResultData);
+        return searchResultData;        
       });
-
   }
+
+  /*          .map(
+            (response) => 
+                {
+                  // console.log(response.title);
+                  return response;
+                }
+            )
+               */
+
   // getNextPage
   // getPreviousPage
   // getPage
@@ -70,10 +86,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
       });
     } */
 
-
-
-
-  // Error handling 
+  // Error handling
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

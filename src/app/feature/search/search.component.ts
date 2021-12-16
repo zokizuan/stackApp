@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
-import { ISearch, IStackAPI_resp } from 'src/app/core/models/search.response.model';
+import {  IStackAPI_resp } from 'src/app/core/models/search.response.model';
 import { SearchViewModel } from 'src/app/core/models/viewmodel/search.view.model';
 import { SearchresultService } from 'src/app/services/searchresult.service';
 import { SharingService } from 'src/app/services/sharing.service';
