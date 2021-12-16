@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchResults(searchQuery: string) {
-    this.searchresultService.searchResults(searchQuery);
+    this.searchresultService.callSearch(searchQuery);
 
   }
 }

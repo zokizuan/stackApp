@@ -41,7 +41,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
    * @description This method is caleld every time user enters NEW query . Response from the api is set to the store 
    * @param searchQuery query eneter by the user
    */
-  public searchResults(searchQuery: string) {
+  public callSearch(searchQuery: string) {
     this.SearchQuery = searchQuery;
     searchQuery = "&q=" + searchQuery;
     const API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize + searchQuery + this.stackoverflow + this.filter
