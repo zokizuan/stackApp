@@ -7,32 +7,36 @@
   <div class="mb24 fs-caption fc-light lh-xs">
     <!-- <div class="mb8">Results for {{searchValue}}</div> -->
   </div>  
-  <div *ngFor="let results of resultForDisplay" class="summary-container">
-    <div class="statscontainer">
-      <div class="votecontainer">
-        <span style="font-size: 1.3rem;">          
-          1843 
-        </span>
-        votes
+  <!-- <div *ngIf="resultForDisplay == ">Found no search results</div> -->
+  <div *ngIf="resultForDisplay">
+    <div *ngFor="let results of resultForDisplay" class="summary-container">
+      <div class="statscontainer">
+        <div class="votecontainer">
+          <span style="font-size: 1.3rem;">
+            1843
+          </span>
+          votes
+        </div>
+        <div class="answercountcontainer">
+          <span style="font-size: 1.3rem; line-height: 1;">15</span>
+          answers
+        </div>
       </div>
-      <div class="answercountcontainer">
-        <span style="font-size: 1.3rem; line-height: 1;">15</span>
-        answers
-      </div>
-    </div>
-    <div class="child2-container">
-      <div class="question"> Q: {{results.title}}? </div>
-      <div>The following print statement would print "hello world". Could anyone explain this? …
-      </div>
-      <div class="tags_user">
-        <div class="tags"> java string random</div>
-        <div class="owner">asked
-          <span title="2013-03-03 04:38:06Z" class="relativetime">Mar 3 '13</span>
-          by 
-          <a href="/users/1031797/0x56794e">0x56794E</a>
+      <div class="child2-container">
+        <div class="question"> Q: {{results.title}}? </div>
+        <div>The following print statement would print "hello world". Could anyone explain this? …
+        </div>
+        <div class="tags_user">
+          <div class="tags"> java string random</div>
+          <div class="owner">asked
+            <span title="2013-03-03 04:38:06Z" class="relativetime">Mar 3 '13</span>
+            by
+            <a href="/users/1031797/0x56794e">0x56794E</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>  
 </div>
+<button (click)="test()"></button>

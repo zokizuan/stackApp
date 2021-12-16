@@ -18,14 +18,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router, private searchresultService: SearchresultService) {
   }
-  ngOnDestroy(): void {
-  }
-  ngOnInit(): void {
-   
-  }
-
   searchResults(searchQuery: string) {
     this.searchresultService.callSearch(searchQuery);
 
   }
+  displaySearch() {
+    this.router.navigate(['search-results']);
+  }
+  ngOnInit(): void {
+    
+  }
+  ngOnDestroy(): void {
+  }
+
 }

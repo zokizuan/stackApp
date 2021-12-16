@@ -13,15 +13,17 @@ export class DisplayComponent implements OnInit {
 
   // searchValue!: string;
   subscription: Subscription[] = [];
-  searchResult$!: Observable<ISearchresult_state>;
-  searchResult!: ISearchresult_state;
+  sResult$!: Observable<ISearchresult_state>;
+  sResult!: ISearchresult_state;
   resultForDisplay!: any;
   /**
   * Subscribe to the value from the store 
   */
   ngOnInit(): void {
-    this.searchResult$ = this.searchresultService.getState();
-    this.subscription.push(this.searchResult$.subscribe(sResult => this.searchResult = sResult));
+    this.sResult$ = this.searchresultService.getState();
+    this.subscription.push(this.sResult$.subscribe(res => this.sResult = res));
+    this.resultForDisplay = this.sResult.searchResults;
+    console.log(this.sResult);
   }
   /**
   * Prevent memory leak by ensureing all subscriptions are unsbscribed when the component is destroyed 
@@ -30,12 +32,12 @@ export class DisplayComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe())
   }
   Test() {
-    this.resultForDisplay = this.searchResult.searchResults;
-    console.log(this.searchResult);
+    this.resultForDisplay = this.sResult.searchResults;
+    console.log(this.sResult);
   }
   nextpage() {
     this.searchresultService.getNextPage();
-    this.resultForDisplay = this.searchResult.searchResults;
-    console.log(this.searchResult);
+    this.resultForDisplay = this.sResult.searchResults;
+    console.log(this.sResult);
   }
 }

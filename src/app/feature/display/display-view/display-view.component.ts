@@ -11,6 +11,9 @@ export class DisplayViewComponent implements OnInit {
 
   constructor(private searchresultService: SearchresultService) { }
   @Input() resultForDisplay!: ISearch[];
+  test() {
+    console.log(this.resultForDisplay)
+  }
   ngOnInit(): void {
   }
   ngOnDestroy(): void {

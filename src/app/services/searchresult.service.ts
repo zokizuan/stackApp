@@ -32,6 +32,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
   readonly APIBaseURL = 'https://api.stackexchange.com/2.3';
   readonly APIParameter = "/search/advanced?";
   readonly stackoverflow = "&site=stackoverflow";
+  readonly searchQueryParam = "&q=";
   readonly filter = "&filter=!3u4cnJYn(8nBk_9SQ";
 
 
@@ -79,9 +80,8 @@ export class SearchresultService extends Store<ISearchresult_state> {
     }
     let pageNumber = `page=${pageNumberValue}`
     let pageSize = "&pagesize=15"
-
-    searchQuery = "&q=" + searchQuery
-    const API_URL = (searchQuery == "" || searchQuery == undefined) ? (this.APIBaseURL + this.APIParameter + pageNumber + pageSize + this.stackoverflow + this.filter) : (this.APIBaseURL + this.APIParameter + pageNumber + pageSize + searchQuery + this.stackoverflow + this.filter);
+    
+    const API_URL = (searchQuery == "" || searchQuery == undefined) ? (this.APIBaseURL + this.APIParameter + pageNumber + pageSize + this.stackoverflow + this.filter) : (this.APIBaseURL + this.APIParameter + pageNumber + pageSize + this.searchQueryParam + searchQuery + this.stackoverflow + this.filter);
     this.http
       .get<IStackAPI_resp>(API_URL)
       .pipe(retry(1), catchError(this.handleError), first())

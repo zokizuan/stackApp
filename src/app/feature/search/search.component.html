@@ -8,9 +8,7 @@
   <div class="search-container">
     <span class="p-input-icon-left ">
       <i class="pi pi-search"></i>
-      <input type="text" pInputText placeholder="Search" [(ngModel)]="searchValue">
+      <input type="text"(keyup.Enter)="searchResults(searchValue); displaySearch()" pInputText placeholder="Search" [(ngModel)]="searchValue">
     </span>
   </div>
-  <button routerLink="search-results" (click)="searchResults(searchValue)">Test</button>
-  <!-- <button (click)="test()">Test2</button> -->
 </div>
