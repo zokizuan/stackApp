@@ -9,16 +9,9 @@ import { SearchresultService } from 'src/app/services/searchresult.service';
 export class DisplayViewComponent implements OnInit {
 
   constructor(private searchresultService: SearchresultService) { }
-  // searchValue!: string;
   @Input() resultForDisplay: any;
-  /**
-  * Subscribe to the value from the store 
-  */
   ngOnInit(): void {
   }
-  /**
-  * Prevent memory leak by ensureing all subscriptions are unsbscribed when the component is destroyed 
-  */
   ngOnDestroy(): void {
   }
 }

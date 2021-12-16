@@ -23,22 +23,33 @@ export class SearchresultService extends Store<ISearchresult_state> {
     });
   }
 
-  // Define API
-  apiURL = 'https://api.stackexchange.com/2.3';
+
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
+
+  SearchQuery = "";
+  // Define API
+  APIBoilerPlate = 'https://api.stackexchange.com/2.3';
+  APIParameter = "/search/advanced?";
+  pageNumber = "page=220";
+  pageSize = "&pagesize=10";
+  stackoverflow = "&site=stackoverflow";
+  filter = "&filter=!3u4cnJYn(8nBk_9SQ";
+
   /**
    * @description This method is caleld every time user enters NEW query . Response from the api is set to the store 
    * @param searchQuery query eneter by the user
    */
-  public searchQuestion(searchQuery: string) {
+  public searchResults(searchQuery: string) {
+    this.SearchQuery = searchQuery;
+    searchQuery = "&q=" + searchQuery;
+    const API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize + searchQuery + this.stackoverflow + this.filter
     this.http
-      .get<IStackAPI_resp>(this.apiURL + '/search/advanced?q=' + searchQuery + '&site=stackoverflow' +
-        '&filter=!3u4cnJYn(8nBk_9SQ')
+      .get<IStackAPI_resp>(API_URL)
       .pipe(retry(1), catchError(this.handleError), first())
       .subscribe((response: IStackAPI_resp) => {
         let searchResultData: ISearchresult_state = {
@@ -55,7 +66,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
   // getNextPage
   // getPreviousPage
   // getPage
-  
+
   // Error handling
   handleError(error: any) {
     let errorMessage = '';

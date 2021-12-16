@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
+import {PaginatorModule} from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
 
 const modules= [
   InputTextModule,
-  FormsModule
+  FormsModule,
+  PaginatorModule,
 ]
 
 @NgModule({

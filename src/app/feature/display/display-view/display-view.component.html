@@ -6,8 +6,7 @@
   </div>
   <div class="mb24 fs-caption fc-light lh-xs">
     <!-- <div class="mb8">Results for {{searchValue}}</div> -->
-  </div>
-  
+  </div>  
   <div *ngFor="let results of resultForDisplay" class="summary-container">
     <div class="statscontainer">
       <div class="votecontainer">
@@ -35,4 +34,5 @@
       </div>
     </div>
   </div>
-</div>  
+  <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>  
+</div>
