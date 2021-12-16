@@ -33,4 +33,9 @@ export class DisplayComponent implements OnInit {
     this.resultForDisplay = this.searchResult.searchResults;
     console.log(this.searchResult);
   }
+  nextpage() {
+    this.searchresultService.getNextPage();
+    this.resultForDisplay = this.searchResult.searchResults;
+    console.log(this.searchResult);
+  }
 }

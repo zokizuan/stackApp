@@ -28,35 +28,68 @@ export class SearchresultService extends Store<ISearchresult_state> {
     }),
   };
 
-  SearchQuery = "";
   // Define API
-  APIBoilerPlate = 'https://api.stackexchange.com/2.3';
-  APIParameter = "/search/advanced?";
-  pageNumber = "page=1";
-  pageSize = "&pagesize=15";
-  stackoverflow = "&site=stackoverflow";
-  filter = "&filter=!3u4cnJYn(8nBk_9SQ";
-  API_URL!: string;
-  /**
-   * @description This method is caleld every time user enters NEW query . Response from the api is set to the store 
-   * @param searchQuery query eneter by the user
-   */
-  public callSearch(searchQuery: string) {
-    if (searchQuery == "" || searchQuery == undefined) {
-      this.API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize  + this.stackoverflow + this.filter
-    } else {      
-      this.SearchQuery = searchQuery;
-      searchQuery = "&q=" + searchQuery;
-      this.API_URL = this.APIBoilerPlate + this.APIParameter + this.pageNumber + this.pageSize + searchQuery + this.stackoverflow + this.filter
+  readonly APIBaseURL = 'https://api.stackexchange.com/2.3';
+  readonly APIParameter = "/search/advanced?";
+  readonly stackoverflow = "&site=stackoverflow";
+  readonly filter = "&filter=!3u4cnJYn(8nBk_9SQ";
+
+
+
+  // Get Current Search Query
+  public getCurrentSearchQuery(): string {
+    let currentSearchQuery!: string;
+    this.getState().pipe(first()).subscribe(sResult => currentSearchQuery = (
+      sResult.searchKey == undefined ? "" : sResult.searchKey
+    ));
+    return currentSearchQuery;
+  }
+  // Get Current Page Number
+  public getCurrentPageNumber(): number {
+    let currentPage!: number;
+    this.getState().pipe(first()).subscribe(sResult => currentPage = (sResult.pageno));
+    if (isNaN(currentPage) || currentPage == 0 || currentPage == undefined) {
+      return 0
+    } else {
+      return currentPage;
     }
+  }
+  // Get Last Page Number
+  public getLastPageNumber(): number {
+    let lastPageNumber!: number;
+    this.getState().pipe(first()).subscribe(sResult => lastPageNumber = (Math.ceil(sResult.total_record/sResult.pagesize)));
+    if (isNaN(lastPageNumber) || lastPageNumber == 0 || lastPageNumber == undefined) {
+      return 0
+    } else {
+      return lastPageNumber;
+    }
+  }
+
+  /**
+   * @description This method is called every time user enters NEW query . Response from the api is set to the store 
+   * @param searchQuery query eneter by the user
+   * @param pageChange Page number on pagechange
+   */
+  public callSearch(searchQuery: string, pageChange?: number) {
+    let pageNumberValue = 1;
+    // page handling
+    if (pageChange) {
+      const newPageNumber = pageChange
+      pageNumberValue = newPageNumber
+    }
+    let pageNumber = `page=${pageNumberValue}`
+    let pageSize = "&pagesize=15"
+
+    searchQuery = "&q=" + searchQuery
+    const API_URL = (searchQuery == "" || searchQuery == undefined) ? (this.APIBaseURL + this.APIParameter + pageNumber + pageSize + this.stackoverflow + this.filter) : (this.APIBaseURL + this.APIParameter + pageNumber + pageSize + searchQuery + this.stackoverflow + this.filter);
     this.http
-      .get<IStackAPI_resp>(this.API_URL)
+      .get<IStackAPI_resp>(API_URL)
       .pipe(retry(1), catchError(this.handleError), first())
       .subscribe((response: IStackAPI_resp) => {
         let searchResultData: ISearchresult_state = {
           searchResults: response.items,
           total_record: response.total,
-          searchKey: searchQuery, 
+          searchKey: searchQuery,
           pagesize: response.page_size,
           pageno: response.page
         }
@@ -66,8 +99,58 @@ export class SearchresultService extends Store<ISearchresult_state> {
 
 
   // getNextPage
+  public getNextPage() {
+    const lastPageNumber = this.getLastPageNumber()
+    const CP = this.getCurrentPageNumber()
+    if (CP == 0) {
+      console.error("current page cannot be 0")
+    }
+    else if (CP >= lastPageNumber) {
+      const errorMessage = "current page cannot more than the last page"
+      console.error(errorMessage)
+      throw new Error(errorMessage);
+    }
+    else {
+      const nextPage = CP + 1;
+      console.log(nextPage)
+      let searchQuery = this.getCurrentSearchQuery()
+      this.callSearch(searchQuery, nextPage)
+    }
+  }
+  // getSpecificPage
+  public getSpecificPage(pageNumber: number) {
+    const lastPageNumber = this.getLastPageNumber()
+    if (pageNumber <= 0) {
+      console.error("current page cannot be 0")
+    }
+    else if (pageNumber > lastPageNumber) {
+      const errorMessage = "current page cannot more than the last page"
+      console.error(errorMessage)
+      throw new Error(errorMessage);
+    }
+    else {
+      console.log(pageNumber)
+      let searchQuery = this.getCurrentSearchQuery()
+      this.callSearch(searchQuery, pageNumber)
+    }
+  }
+  
   // getPreviousPage
-  // getPage
+  public getPreviousPage() {
+    const CP = this.getCurrentPageNumber()
+    if (CP == 0) {
+      console.error("current page cannot be 0")
+    }
+    else if (CP == 1) {
+      console.error("This is the first page")
+    }
+    else {
+      const nextPage = CP + 1;
+      console.log(nextPage)
+      let searchQuery = this.getCurrentSearchQuery()
+      this.callSearch(searchQuery, nextPage)
+    }
+  }
 
   // Error handling
   handleError(error: any) {
