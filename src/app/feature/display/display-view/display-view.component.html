@@ -1,6 +1,5 @@
 <p>display-child works!</p>
-<br>
-<button (click)="Test()" > Test</button>
+
  <div id="mainbar">
   <div>
     <h1 style="flex: 1 auto !important;font-size: 2.07692308rem !important;"> Search Results </h1>
@@ -9,7 +8,7 @@
     <!-- <div class="mb8">Results for {{searchValue}}</div> -->
   </div>
   
-  <div *ngFor="let results of resultDisplay[0]" class="summary-container">
+  <div *ngFor="let results of resultForDisplay" class="summary-container">
     <div class="statscontainer">
       <div class="votecontainer">
         <span style="font-size: 1.3rem;">          

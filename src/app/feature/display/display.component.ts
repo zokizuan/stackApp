@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { ISearchresult_state } from 'src/app/core/models/statemodel/stateresponse';
 import { SearchresultService } from 'src/app/services/searchresult.service';
-import { SharingService } from 'src/app/services/sharing.service';
 
 @Component({
   selector: 'app-display',
@@ -8,10 +9,28 @@ import { SharingService } from 'src/app/services/sharing.service';
   styleUrls: ['./display.component.scss']
 })
 export class DisplayComponent implements OnInit {
-  searchResults: any;
-  constructor(private sharingService: SharingService, private searchresultService:SearchresultService) { }
+  constructor(private searchresultService: SearchresultService) { }
 
+  // searchValue!: string;
+  subscription: Subscription[] = [];
+  searchResult$!: Observable<ISearchresult_state>;
+  searchResult!: ISearchresult_state;
+  resultForDisplay!: any;
+  /**
+  * Subscribe to the value from the store 
+  */
   ngOnInit(): void {
-    // this.searchResults = this.sharingService.getData();
+    this.searchResult$ = this.searchresultService.getState();
+    this.subscription.push(this.searchResult$.subscribe(sResult => this.searchResult = sResult));
+  }
+  /**
+  * Prevent memory leak by ensureing all subscriptions are unsbscribed when the component is destroyed 
+  */
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => subscription.unsubscribe())
+  }
+  Test() {
+    this.resultForDisplay = this.searchResult.searchResults;
+    console.log(this.searchResult);
   }
 }
