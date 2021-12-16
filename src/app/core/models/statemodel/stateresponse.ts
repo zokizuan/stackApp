@@ -8,6 +8,5 @@ export interface ISearchresult_state {
   pageno: number;
 }
 export interface Record {
-  // pageno: number;
   search_items: ISearch[];
 }

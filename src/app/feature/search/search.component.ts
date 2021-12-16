@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription, Observable } from 'rxjs';
 import {  IStackAPI_resp } from 'src/app/core/models/search.response.model';
+import { ISearchresult_state } from 'src/app/core/models/statemodel/stateresponse';
 import { SearchViewModel } from 'src/app/core/models/viewmodel/search.view.model';
 import { SearchresultService } from 'src/app/services/searchresult.service';
 import { SharingService } from 'src/app/services/sharing.service';
@@ -13,14 +15,24 @@ import { SharingService } from 'src/app/services/sharing.service';
 })
 export class SearchComponent implements OnInit, OnDestroy {
   searchValue!: string;
+  subscription: Subscription[] = [];
+  searchResult$ !: Observable<ISearchresult_state>;
+  searchResult !: ISearchresult_state;
   constructor(
     private router: Router, private sharingService: SharingService, private searchresultService:SearchresultService) {
   }
+  /**
+   * Prevent memory leak by ensureing all subscriptions are unsbscribed when the component is destroyed 
+   */
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.subscription.forEach(subscription => subscription.unsubscribe())
   }
+  /**
+   * Subscribe to the value from the store 
+   */
   ngOnInit(): void {
-
+    this.searchResult$ = this.searchresultService.getState();
+    this.subscription.push(this.searchResult$.subscribe(sResult => this.searchResult = sResult));
   }
   // declare searchresult variable
   searchResults: any;
@@ -34,27 +46,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   testvar: any;
   searchQuestion(searchQuery:string) {
     this.searchresultService.searchQuestion(searchQuery);
+    
   }
-  // SearchQuestions api consume
- /*  searchQuestions(searchQuery: string) {
-    this.testvar = this.stackCommService.getSearchResult(searchQuery).subscribe((searchResult: IStackAPI_resp) => {
-      let searchResultData: SearchViewModel[] = searchResult.items.map((result: ISearch) => {
-        return {
-          tags: result.tags,
-          owner: result.owner,
-          is_answered: result.is_answered,
-          view_count: result.view_count,
-          answer_count: result.answer_count,
-          creation_date: result.creation_date,
-          question_id: result.question_id,
-          link: result.link,
-          title: result.title,
-          body_markdown: result.body_markdown
-        }
-      });
-      console.log(searchResultData);
-    });
-    this.sendSearchResults();
-  } */
-
 }

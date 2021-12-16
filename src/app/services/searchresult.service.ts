@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '../store';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, retry, throwError } from 'rxjs';
+import { catchError, first, retry, throwError } from 'rxjs';
 import { ISearchresult_state } from '../core/models/statemodel/stateresponse';
 
 @Injectable({
@@ -31,12 +31,15 @@ export class SearchresultService extends Store<ISearchresult_state> {
       'Content-Type': 'application/json',
     }),
   };
-
+  /**
+   * @description This method is caleld every time user enters NEW query . Response from the api is set to the store 
+   * @param searchQuery query eneter by the user
+   */
   public searchQuestion(searchQuery: string) {
-    return this.http
+    this.http
       .get<IStackAPI_resp>(this.apiURL + '/search/advanced?q=' + searchQuery + '&site=stackoverflow' +
         '&filter=!3u4cnJYn(8nBk_9SQ')
-      .pipe(retry(1), catchError(this.handleError))
+      .pipe(retry(1), catchError(this.handleError), first())
       .subscribe((response: IStackAPI_resp) => {
         let searchResultData: ISearchresult_state = {
           record: [{
@@ -47,8 +50,7 @@ export class SearchresultService extends Store<ISearchresult_state> {
           pagesize: response.page_size,
           pageno: response.page
         }
-        console.log(searchResultData);
-        return searchResultData;        
+        this.setState(searchResultData);
       });
   }
 
