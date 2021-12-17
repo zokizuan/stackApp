@@ -33,6 +33,9 @@
         </div>
       </div>
     </div>
-  <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>  
+    
+    <p-paginator currentPageReportTemplate  [alwaysShow]="false" [rows]="1" [totalRecords]="totalRecords" [pageLinkSize]="5" [showCurrentPageReport] = "true" currentPageReportTemplate="{{first}} " (onPageChange)="paginate($event)" ></p-paginator>
+    
+    
 </div>
 <button (click)="test()"></button>

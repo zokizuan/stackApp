@@ -16,7 +16,7 @@ export class DisplayComponent implements OnInit {
   subscription: Subscription[] = [];
   sResult$!: Observable<ISearchresult_state>;
   sResult!: ISearchresult_state;
-  resultForDisplay!: ISearch[];
+  // resultForDisplay!: ISearch[];
   /**
   * Subscribe to the value from the store 
   */
@@ -25,7 +25,6 @@ export class DisplayComponent implements OnInit {
     this.subscription.push(this.sResult$.subscribe
       ((res) => {
         this.sResult = res
-        this.resultForDisplay = res.searchResults
       })
     );
   }
@@ -41,7 +40,7 @@ export class DisplayComponent implements OnInit {
   }
   nextpage() {
     this.searchresultService.getNextPage();
-    this.resultForDisplay = this.sResult.searchResults;
+    // this.resultForDisplay = this.sResult.searchResults;
     console.log(this.sResult);
   }
 }
