@@ -35,7 +35,6 @@
 }
 .summary-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 12px 8px;
   overflow: hidden;
@@ -80,4 +79,8 @@
   font-size: 12px;
   margin-top: 4px;
   margin-right: 16px;
+}
+
+.body{
+  display: inline;
 }

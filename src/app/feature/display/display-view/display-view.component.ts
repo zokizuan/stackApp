@@ -19,15 +19,32 @@ export class DisplayViewComponent implements OnInit {
 
   totalRecords = 5
   myPaginationString = "";
-  first = ""
+  pageInfo = ""
   paginate(event: any) {
+
+    event.first = 1
+    event.rows = 15
+    event.page = this.searchresultService.getCurrentPageNumber()
+    // event.pageCount =
+
     this.totalRecords = this.searchresultService.getLastPageNumber()
-    event.page = this.sResult.pageno
-    event.pageCount = 4
-    this.first = event.first +"of"+ this.totalRecords
+    this.pageInfo = (event.first + 1) + "of" + this.totalRecords
     // this.totalRecords = 3
-    this.myPaginationString  = "showing "
+    this.myPaginationString = "showing "
     console.log(this)
+  }
+
+
+  bodyTruncate(str: string, length: number) {
+    const ending = '<span>...</span></p>';
+    str = str.substring(0, length - ending.length);
+    const regex = /<\/p>[\s\S]+/i;
+    const subst = ``;
+    let result = str.replace(regex, subst);
+    console.log(result)
+    // const removeCodefrombodyRegex = /<pre.[\s\S]+/i;
+    // result = str.replace(removeCodefrombodyRegex, subst);
+    return result + ending
   }
   test() {
     console.log(this.resultForDisplay)
@@ -36,4 +53,10 @@ export class DisplayViewComponent implements OnInit {
   }
   ngOnDestroy(): void {
   }
+  nextpage() {
+    this.searchresultService.getNextPage();
+    this.resultForDisplay = this.sResult.searchResults;
+    console.log(this.sResult);
+  }
+
 }

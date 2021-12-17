@@ -20,9 +20,8 @@
         </div>
       </div>
       <div class="child2-container">
-        <div class="question"> Q: {{results.title}}? </div>
-        <div>The following print statement would print "hello world". Could anyone explain this? …
-        </div>
+        <div class="question" innerHTML="Q: {{results.title}}"> Q: </div>
+        <div class="body" innerHTML="{{bodyTruncate(results.body, 150)}}"></div>
         <div class="tags_user">
           <div class="tags"> java string random</div>
           <div class="owner">asked
@@ -33,9 +32,11 @@
         </div>
       </div>
     </div>
-    
-    <p-paginator currentPageReportTemplate  [alwaysShow]="false" [rows]="1" [totalRecords]="totalRecords" [pageLinkSize]="5" [showCurrentPageReport] = "true" currentPageReportTemplate="{{first}} " (onPageChange)="paginate($event)" ></p-paginator>
+    <!-- [showJumpToPageDropdown] = "true"
+     -->
+    <p-paginator currentPageReportTemplate  [alwaysShow]="false" [rows]="1" [totalRecords]="totalRecords" [pageLinkSize]="5" [showCurrentPageReport] = "true"  currentPageReportTemplate="{{pageInfo}} " (onPageChange)="paginate($event)" ></p-paginator>
     
     
 </div>
 <button (click)="test()"></button>
+<button (click)="nextpage()" > Nextpage</button>
