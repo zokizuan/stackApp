@@ -1,14 +1,8 @@
 
+
 #mainbar,
 .mainbar {
-  width: calc(100% - 300px - 24px);
-  
-}
-#mainbar,
-.mainbar {
-  float: left;
-  width: 728px;
-  margin: 0;
+  max-width: 728px;
   padding: 0;
 }
 .summary-container {
@@ -70,6 +64,7 @@
 }
 .tags {
   display: flex;
+  max-height: 28px;
 }
 
 .tag {
@@ -88,4 +83,13 @@
   border-radius: 3px;
   cursor: pointer;
   border-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .tags_user {
+    flex-direction: column;
+  }
+  .statscontainer{
+    display: none;
+  }
 }

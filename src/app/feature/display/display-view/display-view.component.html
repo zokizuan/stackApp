@@ -1,12 +1,13 @@
  <div id="mainbar">
-  <div>
-    <h1 style="flex: 1 auto !important;font-size: 2.07692308rem !important;"> Search Results </h1>
+
+  <div *ngIf="resultForDisplay.length == 0">
+    <p style="flex: 1 auto !important;font-size: 2.07692308rem !important; text-align: center;"> Please Search</p>
   </div>
-  <div class="mb24 fs-caption fc-light lh-xs">
-    <!-- <div class="mb8">Results for {{searchValue}}</div> -->
-  </div>  
   
-  <div *ngIf="resultForDisplay.length == 0">Found no search results</div>
+  <div *ngIf="resultForDisplay.length > 0">
+    <div>
+      <p style="flex: 1 auto !important;font-size: 2.07692308rem !important; text-align: center;"> Search Results </p>
+    </div>
     <div *ngFor="let results of resultForDisplay" class="summary-container">
       <div class="statscontainer">
         <div class="votecontainer">
@@ -35,6 +36,7 @@
         </div>
       </div>
     </div>
+  </div>
     <!-- [showJumpToPageDropdown] = "true"
      -->
     <p-paginator currentPageReportTemplate  [alwaysShow]="false" [rows]="15" [totalRecords]="totalRecords" [pageLinkSize]="5" [showCurrentPageReport] = "true" 
