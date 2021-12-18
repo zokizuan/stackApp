@@ -21,7 +21,10 @@ export class DisplayViewComponent implements OnInit {
 
   pageInfo = ""
   paginate(event: any) {
-    // Initial Page
+
+    // Scroll to Top
+    this.scrollToTop(0, 250) 
+
     // console.log("Initial Page " + event.first)
     this.searchresultService.getSpecificPage((event.first / event.rows) + 1);
     // console.log("rows to display " + event.rows)
@@ -48,19 +51,39 @@ export class DisplayViewComponent implements OnInit {
     let result = str.replace(regex, subst);
     return result + ending
   }
-  
-  checkResultForDisplay():boolean {
-    if (this.resultForDisplay.length > 0 ) {
+
+  checkResultForDisplay(): boolean {
+    if (this.resultForDisplay.length > 0) {
       this.searchStarted = true
       return true
     }
     else {
       return false
-      
+
     }
   }
+  scrollToTop(pos:any, time:any) {
+    let currentPos = window.pageYOffset;
+    let start: number | null = null;
+    if(time == null) time = 500;
+    pos = +pos, time = +time;
+    window.requestAnimationFrame(function step(currentTime) {
+        start = !start ? currentTime : start;
+        let progress = currentTime - start;
+        if (currentPos < pos) {
+            window.scrollTo(0, ((pos - currentPos) * progress / time) + currentPos);
+        } else {
+            window.scrollTo(0, currentPos - ((currentPos - pos) * progress / time));
+        }
+        if (progress < time) {
+            window.requestAnimationFrame(step);
+        } else {
+            window.scrollTo(0, pos);
+        }
+    });
+  }
   ngOnInit(): void {
-    
+
   }
   ngOnDestroy(): void {
   }

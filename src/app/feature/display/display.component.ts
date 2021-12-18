@@ -16,7 +16,6 @@ export class DisplayComponent implements OnInit {
   subscription: Subscription[] = [];
   sResult$!: Observable<ISearchresult_state>;
   sResult!: ISearchresult_state;
-  // searchStarted: boolean = false;
 
   // resultForDisplay!: ISearch[];
   /**
