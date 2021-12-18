@@ -1,14 +1,24 @@
 <div class="container">
-  <div class="logo-container">
-    <div>
-      <p>Stack<span style="font-family: 700;">App</span></p>
+  <div class="child-container">
+    <div class="logo-container">
+      <div>
+        <p>Stack<strong>App</strong></p>
+      </div>
+    </div>
+    <div class="search-container">
+      <div class="search">
+        <input type="text" autocomplete="off"
+               (keyup.Enter)="searchResults(searchValue); displaySearch()" class="searchInpuBar"
+               placeholder="Search" [(ngModel)]="searchValue">
+      </div>
+      <button id="search-button" (click)="searchResults(searchValue); displaySearch()">Search</button>
     </div>
   </div>
-  <!-- search bar -->
+  <!--   
   <div class="search-container">
     <span class="p-input-icon-left ">
       <i class="pi pi-search"></i>
-      <input type="text"(keyup.Enter)="searchResults(searchValue); displaySearch()" pInputText placeholder="Search" [(ngModel)]="searchValue">
+      <input type="text"(keyup.Enter)="searchResults(searchValue); displaySearch()" class="searchbar" placeholder="Search" [(ngModel)]="searchValue">
     </span>
-  </div>
+  </div> -->
 </div>

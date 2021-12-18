@@ -1,30 +1,8 @@
-.container {
-  width: 100vw;
-  background-color: #f8f9f9;
-  display: flex;
-  height: 70px;
-  box-sizing: border-box;
-  border-top: 3px solid #f48225;
-  align-items: center;
-}
-
-.logo-container {
-  padding-left: 20px;
-  font-size: 1.5rem;
-  width: 20%;
-}
-.search-container {
-  width: 80%;
-  justify-content: center;
-}
-
-[pInputText] {
-  width: 650px;
-}
 
 #mainbar,
 .mainbar {
   width: calc(100% - 300px - 24px);
+  
 }
 #mainbar,
 .mainbar {
