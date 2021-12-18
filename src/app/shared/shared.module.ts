@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import {PaginatorModule} from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
-
+// import {SkeletonModule} from 'primeng/skeleton';
 const modules= [
   InputTextModule,
   FormsModule,

@@ -5,6 +5,7 @@
   <div class="mb24 fs-caption fc-light lh-xs">
     <!-- <div class="mb8">Results for {{searchValue}}</div> -->
   </div>  
+  
   <div *ngIf="resultForDisplay.length == 0">Found no search results</div>
     <div *ngFor="let results of resultForDisplay" class="summary-container">
       <div class="statscontainer">
@@ -34,7 +35,8 @@
     </div>
     <!-- [showJumpToPageDropdown] = "true"
      -->
-    <p-paginator currentPageReportTemplate  [alwaysShow]="false" [rows]="1" [totalRecords]="totalRecords" [pageLinkSize]="5" [showCurrentPageReport] = "true"  currentPageReportTemplate="{{pageInfo}} " (onPageChange)="paginate($event)" ></p-paginator>
+    <p-paginator currentPageReportTemplate  [alwaysShow]="true" [rows]="15" [totalRecords]="totalRecords" [pageLinkSize]="5" [showCurrentPageReport] = "true" 
+     currentPageReportTemplate="{{pageInfo}} " (onPageChange)="paginate($event)" ></p-paginator>
     
     
 </div>

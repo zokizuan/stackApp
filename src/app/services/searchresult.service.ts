@@ -58,10 +58,12 @@ export class SearchresultService extends Store<ISearchresult_state> {
   // Get Last Page Number
   public getLastPageNumber(): number {
     let lastPageNumber!: number;
-    this.getState().pipe(first()).subscribe(sResult => lastPageNumber = (Math.ceil(sResult.total_record/sResult.pagesize)));
+    this.getState().pipe(first()).subscribe(sResult => 
+      lastPageNumber = (Math.ceil(sResult.total_record / sResult.pagesize)));
     if (isNaN(lastPageNumber) || lastPageNumber == 0 || lastPageNumber == undefined) {
       return 0
     } else {
+      // console.log("last page returned " + lastPageNumber) 
       return lastPageNumber;
     }
   }
@@ -125,13 +127,14 @@ export class SearchresultService extends Store<ISearchresult_state> {
     if (pageNumber <= 0) {
       console.error("current page cannot be 0")
     }
-    else if (pageNumber > lastPageNumber) {
+/*     else if (pageNumber > lastPageNumber) {
       const errorMessage = "current page cannot more than the last page"
       console.error(errorMessage)
       throw new Error(errorMessage);
-    }
+    } */
     else {
-      console.log(pageNumber)
+      // console.log("pageNumber input to func " + pageNumber)
+      // console.log("lastpage Number wrt to func " + pageNumber)
       let searchQuery = this.getCurrentSearchQuery()
       this.callSearch(searchQuery, pageNumber)
     }

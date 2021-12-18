@@ -18,20 +18,28 @@ export class DisplayViewComponent implements OnInit {
   @Input() resultForDisplay!: ISearch[];
 
   totalRecords = 5
-  myPaginationString = "";
   pageInfo = ""
   paginate(event: any) {
-
-    event.first = 1
-    event.rows = 15
-    event.page = this.searchresultService.getCurrentPageNumber()
-    // event.pageCount =
-
-    this.totalRecords = this.searchresultService.getLastPageNumber()
-    this.pageInfo = (event.first + 1) + "of" + this.totalRecords
-    // this.totalRecords = 3
-    this.myPaginationString = "showing "
-    console.log(this)
+    // Initial Page
+    // event.first = 1
+    console.log("Initial Page " + event.first)
+    this.searchresultService.getSpecificPage((event.first/event.rows) + 1);
+    
+    //Number of rows to display in new page
+    // event.rows = 15
+    console.log("rows to display " + event.rows)
+    
+    //event.page = Index of the new page
+    // event.page = this.searchresultService.getCurrentPageNumber() + 1
+    // console.log("Index of the new page " + event.page)
+    
+    //event.pageCount = Total number of pages
+    event.pageCount = this.searchresultService.getLastPageNumber()
+    console.log("Total Page " + event.pageCount)    
+    // total Records
+    this.totalRecords = this.sResult.total_record
+    console.log("event.totalRecords " + this.totalRecords)
+    this.pageInfo = (event.first/event.rows)+1 + "of" + event.pageCount
   }
 
 
@@ -41,9 +49,6 @@ export class DisplayViewComponent implements OnInit {
     const regex = /<\/p>[\s\S]+/i;
     const subst = ``;
     let result = str.replace(regex, subst);
-    console.log(result)
-    // const removeCodefrombodyRegex = /<pre.[\s\S]+/i;
-    // result = str.replace(removeCodefrombodyRegex, subst);
     return result + ending
   }
   test() {
