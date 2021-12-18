@@ -34,9 +34,6 @@ export class DisplayComponent implements OnInit {
   ngOnDestroy(): void {
     this.subscription.forEach(subscription => subscription.unsubscribe())
   }
-  Test() {
-    // this.resultForDisplay = this.sResult.searchResults;
-    console.log(this.sResult);
-  }
+
 
 }
