@@ -17,6 +17,7 @@ export class DisplayViewComponent implements OnInit {
   @Input() sResult!: ISearchresult_state;
   @Input() resultForDisplay: ISearch[] = [];
   @Input() totalRecords!: number;
+  @Input() searchStarted: boolean = false;
 
   pageInfo = ""
   paginate(event: any) {
@@ -47,7 +48,19 @@ export class DisplayViewComponent implements OnInit {
     let result = str.replace(regex, subst);
     return result + ending
   }
+  
+  checkResultForDisplay():boolean {
+    if (this.resultForDisplay.length > 0 ) {
+      this.searchStarted = true
+      return true
+    }
+    else {
+      return false
+      
+    }
+  }
   ngOnInit(): void {
+    
   }
   ngOnDestroy(): void {
   }

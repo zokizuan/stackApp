@@ -1,10 +1,13 @@
  <div id="mainbar">
 
-  <div *ngIf="resultForDisplay.length == 0">
+  <div *ngIf="resultForDisplay.length == 0 && searchStarted == false">
     <p style="flex: 1 auto !important;font-size: 2.07692308rem !important; text-align: center;"> Please Search</p>
   </div>
+  <div *ngIf="resultForDisplay.length == 0 && searchStarted == true">
+    <p style="flex: 1 auto !important;font-size: 2.07692308rem !important; text-align: center;"> No Results Found</p>
+  </div>
   
-  <div *ngIf="resultForDisplay.length > 0">
+  <div *ngIf="checkResultForDisplay() == true">
     <div>
       <p style="flex: 1 auto !important;font-size: 2.07692308rem !important; text-align: center;"> Search Results </p>
     </div>

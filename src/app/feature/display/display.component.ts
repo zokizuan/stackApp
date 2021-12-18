@@ -16,6 +16,8 @@ export class DisplayComponent implements OnInit {
   subscription: Subscription[] = [];
   sResult$!: Observable<ISearchresult_state>;
   sResult!: ISearchresult_state;
+  // searchStarted: boolean = false;
+
   // resultForDisplay!: ISearch[];
   /**
   * Subscribe to the value from the store 
@@ -25,6 +27,8 @@ export class DisplayComponent implements OnInit {
     this.subscription.push(this.sResult$.subscribe
       ((res) => {
         this.sResult = res
+
+        // this.searchStarted = true;
       })
     );
   }
